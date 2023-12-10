@@ -8,17 +8,19 @@ window.geometry("300x300")
 window.minsize(200, 200)
 # maximum size
 window.maxsize(500, 500)
-# making the whiteboard border
+# making the whiteboard canvas
+Grid.columnconfigure(window, index = 0,weight = 1)
+Grid.rowconfigure(window, index=0, weight = 1)
 my_canvas = Canvas(window,width=300, height=250, bg="white")
+my_canvas.grid(row=0,column=0,sticky="NSEW")
 #equation produced after input made
 #sample holder
 equation = Label(window,text="7+8")
-equation.place(x=140,y=10)
+equation.place(relx=0.35,y=10,anchor='n')
 #label will be constant
 equal = Label(window,text="=")
-equal.place(x=180,y=10)
+equal.place(relx=0.50,y=10,anchor='n')
 #produce result of the equation
-equation = Label(window,text="15")
-equation.place(x=200,y=10)
-my_canvas.place(x=0,y=50)
+answer = Label(window,text="15")
+answer.place(relx=0.60,y=10,anchor='n')
 window.mainloop
