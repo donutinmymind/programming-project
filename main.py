@@ -12,15 +12,15 @@ window.maxsize(500, 500)
 Grid.columnconfigure(window, index = 0,weight = 1)
 Grid.rowconfigure(window, index=0, weight = 1)
 my_canvas=Canvas(window,width=300, height=250, bg="white")
-my_canvas.grid(row=1,column=0,columnspan=3)
+my_canvas.grid(row=1,column=0,sticky="NSEW")
 #equation produced after input made
 #sample holder
 equation = Label(window,text="7+8")
-equation.grid(row=0,column=0)
+equation.place(relx=0.35,y=10,anchor='n')
 #label will be constant
 equal = Label(window,text="=")
-equal.grid(row=0,column=1)
+equal.place(relx=0.50,y=10,anchor='n')
 #produce result of the equation
 answer = Label(window,text="15")
-answer.grid(row=0,column=2)
+answer.place(relx=0.50,y=10,anchor='n')
 window.mainloop
