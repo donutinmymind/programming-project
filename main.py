@@ -11,12 +11,12 @@ window.maxsize(500, 500)
 # making the whiteboard window
 
 def get_x_and_y(event):
-    global lasx, lasy
-    lasx,lasy =event.x, event.y
+    global lastx, lasty
+    lastx,lasty =event.x, event.y
 def draw_smth(event):
-    global lasx, lasy
-    my_canvas.create_line((lasx, lasy,event.x, event.y),width=10,capstyle=ROUND,smooth=TRUE)
-    lasx,lasy=event.x,event.y
+    global lastx, lasty
+    my_canvas.create_line((lastx, lasty,event.x, event.y),width=10,capstyle=ROUND,smooth=TRUE)
+    lastx,lasty=event.x,event.y
     
 Grid.columnconfigure(window, index = 0,weight = 1)
 Grid.rowconfigure(window, index=0, weight = 1)
