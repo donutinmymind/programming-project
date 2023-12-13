@@ -38,7 +38,6 @@ answer.place(relx=0.60,y=10,anchor='n')
 # resizes labels based on window size
 def on_window_resize(event):
     relwidth=window.winfo_width()
-    height=window.winfo_height()
     equation.config(font=("Helvetica",int(relwidth/15)))
     equal.config(font=("Helvetica",int(relwidth/15)))
     answer.config(font=("Helvetica",int(relwidth/15)))
