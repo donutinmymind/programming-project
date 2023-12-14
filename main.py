@@ -10,10 +10,10 @@ window.minsize(200, 200)
 window.maxsize(500, 500)
 # making the whiteboard window
 
-def get_x_and_y(event):
+def get_coordinates(event):
     global lastx, lasty
     lastx,lasty =event.x, event.y
-def draw_smth(event):
+def draw(event):
     global lastx, lasty
     my_canvas.create_line((lastx, lasty,event.x, event.y),width=10,capstyle=ROUND,smooth=TRUE)
     lastx,lasty=event.x,event.y
@@ -23,8 +23,8 @@ Grid.rowconfigure(window, index=0, weight = 1)
 my_canvas=Canvas(window,width=300, height=250, bg="white")
 my_canvas.grid(row=0,column=0,sticky="NSEW")
 
-my_canvas.bind("<Button-1>",get_x_and_y)
-my_canvas.bind("<B1-Motion>", draw_smth)
+my_canvas.bind("<Button-1>",get_coordinates)
+my_canvas.bind("<B1-Motion>", draw)
 #equation produced after input made
 #sample holder
 equation = Label(window,text="7+8")
