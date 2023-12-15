@@ -18,10 +18,9 @@ def draw(event):
     my_canvas.create_line((lastx, lasty,event.x, event.y),width=10,capstyle=ROUND,smooth=TRUE)
     lastx,lasty=event.x,event.y
     
-Grid.columnconfigure(window, index = 0,weight = 1)
-Grid.rowconfigure(window, index=0, weight = 1)
 my_canvas=Canvas(window,width=300, height=250, bg="white")
-my_canvas.grid(row=0,column=0,sticky="NSEW")
+my_canvas.pack(fill="both",expand=True)
+
 
 my_canvas.bind("<Button-1>",get_coordinates)
 my_canvas.bind("<B1-Motion>", draw)
