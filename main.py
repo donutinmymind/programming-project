@@ -21,9 +21,15 @@ def draw(event):
 my_canvas=Canvas(window,width=300, height=250, bg="white")
 my_canvas.pack(fill="both",expand=True)
 
+def OnEnter(event):
+    global drawing, coords
+    coords=my_canvas.bind('<Button-1>',get_coordinates)
+    drawing=my_canvas.bind('<B1-Motion>',draw)
+def OnLeave(event):
+    my_canvas.unbind('<Button-1>',drawing)
+my_canvas.bind('<Enter>', OnEnter)
+my_canvas.bind('<Leave>',OnLeave)
 
-my_canvas.bind("<Button-1>",get_coordinates)
-my_canvas.bind("<B1-Motion>", draw)
 #equation produced after input made
 #sample holder
 equation = Label(window,text="7+8")
