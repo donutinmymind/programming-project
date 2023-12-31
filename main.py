@@ -3,30 +3,34 @@ from tkinter.ttk import *
 window = Tk()
 window.title("Drawing Calculator")
 # default size and position
-window.geometry("300x300")
+window.geometry("300x325")
 # minimum size
-window.minsize(200, 200)
+window.minsize(225, 250)
 # maximum size
-window.maxsize(500, 500)
+window.maxsize(500, 525)
 # making the whiteboard window
-
+#subroutines for drawing with pen
 def get_coordinates(event):
     global lastx, lasty
     lastx,lasty =event.x, event.y
 def draw(event):
     global lastx, lasty
-    my_canvas.create_line((lastx, lasty,event.x, event.y),width=10,capstyle=ROUND,smooth=TRUE)
+    my_canvas.create_line((lastx, lasty,event.x, event.y),width=12,capstyle=ROUND,smooth=TRUE)
     lastx,lasty=event.x,event.y
-    
+#whiteboard created    
 my_canvas=Canvas(window,width=300, height=250, bg="white")
 my_canvas.pack(fill="both",expand=True)
-
+#Make sure only the part of the window that's visible to user can be drawn on
 def OnEnter(event):
     global drawing, coords
     coords=my_canvas.bind('<Button-1>',get_coordinates)
     drawing=my_canvas.bind('<B1-Motion>',draw)
 def OnLeave(event):
-    my_canvas.unbind('<Button-1>',drawing)
+    try:
+        my_canvas.unbind('<Button-1>',drawing)
+    except:
+        pass
+    
 my_canvas.bind('<Enter>', OnEnter)
 my_canvas.bind('<Leave>',OnLeave)
 
@@ -47,4 +51,4 @@ def on_window_resize(event):
     equal.config(font=("Helvetica",int(relwidth/15)))
     answer.config(font=("Helvetica",int(relwidth/15)))
 window.bind("<Configure>",on_window_resize)
-window.mainloop
+window.mainloop()
