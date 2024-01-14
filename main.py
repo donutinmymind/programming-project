@@ -33,9 +33,7 @@ def OnLeave(event):
         my_canvas.unbind('<Button-1>',drawing)
     except:
         pass
-    screenshot = Image.new("RGB",(600,600), "white")
-    kool= ImageDraw.Draw(screenshot)
-    
+
 def capture_screenshot(event):
     global screenshot
     # Get the window's coordinates and dimensions
