@@ -1,5 +1,8 @@
 from tkinter import *
 from tkinter.ttk import *
+from PIL import ImageTk,Image,ImageDraw
+from PIL import ImageGrab
+import os
 window = Tk()
 window.title("Drawing Calculator")
 # default size and position
@@ -15,7 +18,7 @@ def get_coordinates(event):
     lastx,lasty =event.x, event.y
 def draw(event):
     global lastx, lasty
-    my_canvas.create_line((lastx, lasty,event.x, event.y),width=12,capstyle=ROUND,smooth=TRUE)
+    my_canvas.create_line((lastx, lasty,event.x, event.y),width=9,capstyle=ROUND,smooth=TRUE)
     lastx,lasty=event.x,event.y
 #whiteboard created    
 my_canvas=Canvas(window,width=300, height=250, bg="white")
@@ -30,9 +33,33 @@ def OnLeave(event):
         my_canvas.unbind('<Button-1>',drawing)
     except:
         pass
+    screenshot = Image.new("RGB",(600,600), "white")
+    kool= ImageDraw.Draw(screenshot)
     
+def capture_screenshot(event):
+    global screenshot
+    # Get the window's coordinates and dimensions
+    x = window.winfo_rootx()
+    y = window.winfo_rooty()
+    width = window.winfo_width()
+    height = window.winfo_height()
+
+    screenshot = ImageGrab.grab(bbox =(2*x, 2*y, 2*(x+width), 2*(y+height))) 
+
+    # Specify the full path including the filename
+    save_directory = r"C:\Users\nirva\OneDrive\Documents\screenshots"
+    save_path = os.path.join(save_directory, "screenshot.png")
+
+    # Create the directory if it doesn't exist
+    if not os.path.exists(save_directory):
+        os.makedirs(save_directory)
+
+    # Save the screenshot in the specified path
+    screenshot.save(save_path)
+
 my_canvas.bind('<Enter>', OnEnter)
 my_canvas.bind('<Leave>',OnLeave)
+my_canvas.bind('<ButtonRelease-1>',capture_screenshot)
 
 #equation produced after input made
 #sample holder
