@@ -41,7 +41,14 @@ def capture_screenshot(event):
     y = window.winfo_rooty()
     width = window.winfo_width()
     height = window.winfo_height()
-
+    
+    #Temporarily removes the labels
+    equation.place_forget()
+    equal.place_forget()
+    answer.place_forget()
+    window.update()
+    
+    #Takes the screenshot of the image
     screenshot = ImageGrab.grab(bbox =(2*x, 2*y, 2*(x+width), 2*(y+height))) 
 
     # Specify the full path including the filename
@@ -54,6 +61,11 @@ def capture_screenshot(event):
 
     # Save the screenshot in the specified path
     screenshot.save(save_path)
+    # readding the labels
+    equation.place(relx=0.35,y=10,anchor='n')
+    equal.place(relx=0.50,y=10,anchor='n')
+    answer.place(relx=0.60,y=10,anchor='n')
+
 
 my_canvas.bind('<Enter>', OnEnter)
 my_canvas.bind('<Leave>',OnLeave)
