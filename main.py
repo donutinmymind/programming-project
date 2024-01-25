@@ -3,6 +3,7 @@ from tkinter.ttk import *
 from PIL import ImageTk,Image,ImageDraw
 from PIL import ImageGrab
 import os
+timer_active=False
 window = Tk()
 window.title("Drawing Calculator")
 # default size and position
@@ -34,8 +35,9 @@ def OnLeave(event):
     except:
         pass
 
-def capture_screenshot(event):
+def capture_screenshot():
     global screenshot
+    global timer_active
     # Get the window's coordinates and dimensions
     x = window.winfo_rootx()
     y = window.winfo_rooty()
@@ -66,10 +68,17 @@ def capture_screenshot(event):
     equal.place(relx=0.50,y=10,anchor='n')
     answer.place(relx=0.60,y=10,anchor='n')
 
-
+    timer_active = False
+def activate_capture(event=None):
+    global timer_active
+    if timer_active:
+        return
+    window.after(5000,capture_screenshot)
+    timer_active = True
+    
 my_canvas.bind('<Enter>', OnEnter)
 my_canvas.bind('<Leave>',OnLeave)
-my_canvas.bind('<ButtonRelease-1>',capture_screenshot)
+my_canvas.bind('<ButtonRelease-1>',activate_capture)
 
 #equation produced after input made
 #sample holder
