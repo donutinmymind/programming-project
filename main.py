@@ -30,8 +30,8 @@ my_canvas=Canvas(window,width=300, height=250, bg="white")
 my_canvas.pack(fill="both",expand=True)
 #Make sure only the part of the window that's visible to user can be drawn on
 def OnEnter(event):
-    global drawing, coords
-    coords=my_canvas.bind('<Button-1>',get_coordinates)
+    global drawing
+    my_canvas.bind('<Button-1>',get_coordinates)
     my_canvas.bind('<Button-1>',dot)
     drawing=my_canvas.bind('<B1-Motion>',draw)
 def OnLeave(event):
@@ -68,7 +68,8 @@ def capture_screenshot():
 
     # Save the screenshot in the specified path
     screenshot.save(save_path)
-    # readding the labels
+    # readding the labels and clear drawing
+    my_canvas.delete('all')
     equation.place(relx=0.35,y=10,anchor='n')
     equal.place(relx=0.50,y=10,anchor='n')
     answer.place(relx=0.60,y=10,anchor='n')
@@ -78,7 +79,7 @@ def activate_capture(event=None):
     global timer_active
     if timer_active:
         return
-    window.after(5000,capture_screenshot)
+    window.after(1750,capture_screenshot)
     timer_active = True
     
 my_canvas.bind('<Enter>', OnEnter)
