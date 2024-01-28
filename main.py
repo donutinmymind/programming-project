@@ -68,7 +68,7 @@ def capture_screenshot():
 
     # Save the screenshot in the specified path
     screenshot.save(save_path)
-    # readding the labels and clear drawing
+    # readding the labels
     my_canvas.delete('all')
     equation.place(relx=0.35,y=10,anchor='n')
     equal.place(relx=0.50,y=10,anchor='n')
