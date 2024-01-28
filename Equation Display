@@ -1,2 +1,13 @@
-equationstack= []
-placeholderinput=input("Enter a number/symbol")
+currentequation = ""
+loop = True
+def outputequationstack(samplestack):
+    global currentequation
+    for i in range(len(samplestack)):
+        currentequation = currentequation + str(samplestack[i])
+    return currentequation
+while loop:
+    equationstack = []
+    placeholderinput = input("Enter a number/symbol ")
+    equationstack.append(placeholderinput)
+    output = outputequationstack(equationstack)
+    print(output)
