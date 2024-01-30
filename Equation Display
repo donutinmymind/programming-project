@@ -4,6 +4,11 @@ def outputequationstack(samplestack):
     global currentequation
     for i in range(len(samplestack)):
         currentequation = currentequation + str(samplestack[i])
+    try:
+        ans= eval(currentequation)
+        print(ans)
+    except:
+        ans = ""
     return currentequation
 while loop:
     equationstack = []
