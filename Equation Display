@@ -1,18 +1,25 @@
-currentequation = ""
 loop = True
+equationstack = []
 def outputequationstack(samplestack):
     global currentequation
-    for i in range(len(samplestack)):
+    currentequation = ""
+    for i in range( len(samplestack)):
         currentequation = currentequation + str(samplestack[i])
     try:
-        ans= eval(currentequation)
+        ans=eval(currentequation)
         print(ans)
     except:
-        ans = ""
+        pass
     return currentequation
+def undo(samplestack):
+    if len(samplestack) > 0:
+        equationstack.pop()
+equationstack = []
 while loop:
-    equationstack = []
     placeholderinput = input("Enter a number/symbol ")
-    equationstack.append(placeholderinput)
+    if placeholderinput =="x":
+        undo(equationstack)
+    else:
+        equationstack.append(placeholderinput)
     output = outputequationstack(equationstack)
     print(output)
