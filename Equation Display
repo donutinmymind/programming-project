@@ -10,10 +10,24 @@ def add():
     global equationstack
     equationstack.append(inputtxt.get(1.0))
     outputequation(equationstack)
+    
+#subroutine to remove latest element from stack
+def undo():
+    global equationstack
+    if len(equationstack) > 0:
+        equationstack.pop()
+        outputequation(equationstack)
 
 #subroutine to display stack as string
 def outputequation(samplestack):
     global currentequation
+    global equationlabel
+    global answerlabel
+    try:
+        equationlabel.destroy()
+        answerlabel.destroy()
+    except:
+        pass
     currentequation = ""
     for i in range( len(samplestack)):
         currentequation = currentequation + str(samplestack[i])
@@ -31,7 +45,10 @@ inputtxt = Text(window, height = 5, width = 20)
 inputtxt.place(relx=0.25,y=50)
   
 # Button Creation 
-printButton = Button(window,text = "Enter", command = add) 
-printButton.place(relx=0.45,rely=0.5)
+enterButton = Button(window,text = "Enter", command = add) 
+enterButton.place(relx=0.45,rely=0.5)
+ 
+undoButton = Button(window,text = "Undo", command = undo) 
+undoButton.place(relx=0.1,rely=0.1)
   
 window.mainloop()
