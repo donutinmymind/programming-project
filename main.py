@@ -76,6 +76,9 @@ def capture_screenshot():
     if not os.path.exists(save_directory):
         os.makedirs(save_directory)
 
+    # Resize the image to the new resolution
+    screenshot = screenshot.resize((28,28))
+
     # Save the screenshot in the specified path
     screenshot.save(save_path)
     # readding the labels
