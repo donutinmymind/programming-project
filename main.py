@@ -1,6 +1,5 @@
 from tkinter import *
 from tkinter.ttk import *
-from PIL import ImageTk, Image, ImageDraw
 from PIL import ImageGrab
 import os
 
@@ -13,38 +12,27 @@ window.minsize(225, 250)
 # maximum size
 window.maxsize(500, 525)
 
-
 # making the whiteboard window
 # subroutines for drawing with pen
 def get_coordinates(event):
     global lastx, lasty
     lastx, lasty = event.x, event.y
-
+    my_canvas.create_line((lastx, lasty, event.x, event.y), width=15, capstyle=ROUND, smooth=TRUE)
 
 def draw(event):
     global lastx, lasty
-    my_canvas.create_line((lastx, lasty, event.x, event.y), width=9, capstyle=ROUND, smooth=TRUE)
+    my_canvas.create_line((lastx, lasty, event.x, event.y), width=15, capstyle=ROUND, smooth=TRUE)
     lastx, lasty = event.x, event.y
-
-
-def dot(event):
-    global lastx, lasty
-    lastx, lasty = event.x, event.y
-    my_canvas.create_line((lastx, lasty, event.x, event.y), width=9, capstyle=ROUND, smooth=TRUE)
-
 
 # whiteboard created
 my_canvas = Canvas(window, width=300, height=250, bg="white")
 my_canvas.pack(fill="both", expand=True)
 
-
 # Make sure only the part of the window that's visible to user can be drawn on
 def OnEnter(event):
     global drawing
     my_canvas.bind('<Button-1>', get_coordinates)
-    my_canvas.bind('<Button-1>', dot)
     drawing = my_canvas.bind('<B1-Motion>', draw)
-
 
 def OnLeave(event):
     try:
@@ -77,9 +65,8 @@ def capture_screenshot():
         os.makedirs(save_directory)
 
     # Resize the image to the new resolution
-    screenshot = screenshot.resize((28,28))
+    screenshot = screenshot.resize((28, 28))
 
-    # Save the screenshot in the specified path
     screenshot.save(save_path)
     # readding the labels
     my_canvas.delete('all')
@@ -98,6 +85,7 @@ def cancel_capture(event):
     except:
         pass
 
+#Conditons for mouse are set
 window.bind('<Button-1>', cancel_capture)
 my_canvas.bind('<Enter>', OnEnter)
 my_canvas.bind('<Leave>', OnLeave)
@@ -113,7 +101,6 @@ equal.place(relx=0.50, y=10, anchor='n')
 # produce result of the equation
 answer = Label(window, text="15")
 answer.place(relx=0.60, y=10, anchor='n')
-
 
 # resizes labels based on window size
 def on_window_resize(event):
