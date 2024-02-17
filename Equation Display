@@ -1,24 +1,29 @@
 from tkinter import *
-window =Tk()
+window = Tk()
 window.geometry("300x300")
 equationstack = []
-equals = Label(window,text="=")
-equals.place(relx=0.45,y=10)
-
-#subroutine to add element to stack
+shift=0
+equals = Label(window, text="=")
+equals.place(relx=0.55, y=10)
+# subroutine to add element to stack
 def add():
     global equationstack
+    global shift
     equationstack.append(inputtxt.get(1.0))
     outputequation(equationstack)
-    
-#subroutine to remove latest element from stack
+    shift=shift-0.02
+
+# subroutine to remove latest element from stack
 def undo():
     global equationstack
+    global shift
     if len(equationstack) > 0:
         equationstack.pop()
         outputequation(equationstack)
+        shift= shift + 0.025
 
-#subroutine to display stack as string
+
+# subroutine to display stack as string
 def outputequation(samplestack):
     global currentequation
     global equationlabel
@@ -29,26 +34,26 @@ def outputequation(samplestack):
     except:
         pass
     currentequation = ""
-    for i in range( len(samplestack)):
+    for i in range(len(samplestack)):
         currentequation = currentequation + str(samplestack[i])
     try:
-        ans=eval(currentequation)
-        answerlabel = Label(window,text=ans)
-        answerlabel.place(relx=0.60,y=10)
+        ans = eval(currentequation)
+        answerlabel = Label(window, text=ans)
+        answerlabel.place(relx=0.6, y=10)
     except:
         pass
-    equationlabel = Label(window,text=currentequation)
-    equationlabel.place(relx=0.35,y=10)
+    equationlabel = Label(window, text=currentequation)
+    equationlabel.place(relx=0.5+shift, y=10)
 
-#TextBox creation
-inputtxt = Text(window, height = 5, width = 20) 
-inputtxt.place(relx=0.25,y=50)
-  
-# Button Creation 
-enterButton = Button(window,text = "Enter", command = add) 
-enterButton.place(relx=0.45,rely=0.5)
- 
-undoButton = Button(window,text = "Undo", command = undo) 
-undoButton.place(relx=0.1,rely=0.1)
-  
+# TextBox creation
+inputtxt = Text(window, height=5, width=20)
+inputtxt.place(relx=0.25, y=50)
+
+# Button Creation
+enterButton = Button(window, text="Enter", command=add)
+enterButton.place(relx=0.45, rely=0.5)
+
+undoButton = Button(window, text="Undo", command=undo)
+undoButton.place(relx=0.1, rely=0.1)
+
 window.mainloop()
