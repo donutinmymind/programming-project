@@ -1,4 +1,5 @@
 from tkinter import *
+
 window = Tk()
 window.geometry("300x300")
 equationstack = []
@@ -8,14 +9,16 @@ equals.place(relx=0.55, y=10)
 # subroutine to add element to stack
 def add():
     global equationstack
+    global currentsize
     global shift
     equationstack.append(inputtxt.get(1.0))
     outputequation(equationstack)
-    shift=shift-0.02
+    shift = shift-0.02
 
 # subroutine to remove latest element from stack
 def undo():
     global equationstack
+    global currentsize
     global shift
     if len(equationstack) > 0:
         equationstack.pop()
@@ -36,14 +39,16 @@ def outputequation(samplestack):
     currentequation = ""
     for i in range(len(samplestack)):
         currentequation = currentequation + str(samplestack[i])
-    try:
-        ans = eval(currentequation)
-        answerlabel = Label(window, text=ans)
-        answerlabel.place(relx=0.6, y=10)
-    except:
-        pass
+    ans = eval(currentequation)
+    if len(str(ans)) >= 20:
+        ans =str(ans)
+        ans = str(ans[0]) +"x10^" + str(len(ans))
+    answerlabel = Label(window, text=ans)
+    answerlabel.place(relx=0.6, y=10)
+
     equationlabel = Label(window, text=currentequation)
     equationlabel.place(relx=0.5+shift, y=10)
+
 
 # TextBox creation
 inputtxt = Text(window, height=5, width=20)
