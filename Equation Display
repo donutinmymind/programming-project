@@ -20,7 +20,7 @@ def undo():
     if len(equationstack) > 0:
         equationstack.pop()
         outputequation(equationstack)
-        shift= shift + 0.025
+        shift= shift + 0.02
 
 
 # subroutine to display stack as string
