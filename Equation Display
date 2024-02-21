@@ -42,9 +42,9 @@ def outputequation(samplestack):
         ans = eval(currentequation)
         if len(str(ans)) >= 20:
             answersize=len(str(ans))
-            ans = round(ans,-(answersize-1))
+            ans = round(ans,-(answersize-2))
             ans=str(ans)
-            ans = str(ans[0]) +"x10^" + str(answersize)
+            ans = str(ans[0])+"."+str(ans[1]) +"x10^" + str(answersize)
         answerlabel = Label(window, text=ans)
         answerlabel.place(relx=0.6, y=10)
     except:
