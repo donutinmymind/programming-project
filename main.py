@@ -17,11 +17,13 @@ window.maxsize(500, 525)
 def get_coordinates(event):
     global lastx, lasty
     lastx, lasty = event.x, event.y
-    my_canvas.create_line((lastx, lasty, event.x, event.y), width=15, capstyle=ROUND, smooth=TRUE)
+    relwidth = window.winfo_width()
+    my_canvas.create_line((lastx, lasty, event.x, event.y), width=relwidth/15, capstyle=ROUND, smooth=TRUE)
 
 def draw(event):
     global lastx, lasty
-    my_canvas.create_line((lastx, lasty, event.x, event.y), width=15, capstyle=ROUND, smooth=TRUE)
+    relwidth = window.winfo_width()
+    my_canvas.create_line((lastx, lasty, event.x, event.y), width=relwidth/15, capstyle=ROUND, smooth=TRUE)
     lastx, lasty = event.x, event.y
 
 # whiteboard created
