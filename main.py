@@ -2,7 +2,10 @@ from tkinter import *
 from tkinter.ttk import *
 from PIL import ImageGrab
 import os
-
+from tensorflow.keras.models import load_model
+import numpy as np
+from tensorflow.keras.preprocessing import image
+from keras.applications.resnet50 import preprocess_input
 window = Tk()
 window.title("Drawing Calculator")
 # default size and position
@@ -11,6 +14,7 @@ window.geometry("300x325")
 window.minsize(225, 250)
 # maximum size
 window.maxsize(500, 525)
+
 
 # making the whiteboard window
 # subroutines for drawing with pen
@@ -68,8 +72,22 @@ def capture_screenshot():
 
     # Resize the image to the new resolution
     screenshot = screenshot.resize((28, 28))
+    #load model
+    model = load_model(r'C:\Users\nirva\OneDrive\Desktop\NN logs\CalculatorNN2.h5')
 
-    screenshot.save(save_path)
+    #load screenshot
+    img_path = r'C:\Users\nirva\OneDrive\Documents\screenshots\screenshot.png'
+    #translate into a format understandable by the neural network
+    img = image.load_img(img_path, target_size=(28, 28))
+    img = image.img_to_array(img)
+    img = np.expand_dims(img, axis=0)
+    img= preprocess_input(img)
+    # Perform prediction
+    prediction_array = model.predict(img)
+
+    # get the index of the class with the highest probability
+    predicted_class_index = np.argmax(prediction_array)
+    print(predicted_class_index)
     # readding the labels
     my_canvas.delete('all')
     equation.place(relx=0.35, y=10, anchor='n')
